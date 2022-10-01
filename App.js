@@ -1,26 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import Constants from 'expo-constants';
+import React from 'react';
 
-import Header from './components/Header';
-import Stories from './components/Stories';
-import Feed from './components/Feed';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import HomeScreen from './screens/HomeScreen';
+import ChatListScreen from './screens/CheckListScreen';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <Header/>
-      <Stories/>
-      <Feed/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="ChatListScreen" component={ChatListScreen} options={{ title: 'Direct' }} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    marginTop: Constants.statusBarHeight,
-  },
-});
