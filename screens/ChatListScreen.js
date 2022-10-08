@@ -1,8 +1,8 @@
 import react, { useEffect, useState } from "react";
-import { Image, StyleSheet, View, Text, StatusBar } from "react-native";
+import { Image, StyleSheet, View, Text, StatusBar, TouchableOpacity } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
-export default function CheckListScreen({ navigation }) {
+export default function ChatListScreen({ navigation }) {
     const [chatList, setChatList] = useState([]);
 
     useEffect(() => {
@@ -15,13 +15,13 @@ export default function CheckListScreen({ navigation }) {
     }, []);
 
     function renderItem({item}) {
-        return <View style={styles.chat}>
+        return <TouchableOpacity style={styles.chat} onPress={() => navigation.navigate('ChatScreen', { id: item.id }) }>
             <Image style={styles.image} source={{ uri: item.imgPerfilUri }}/>
             <View style={styles.textBox}>
                 <Text style={styles.nome}>{item.nomeUsuario}</Text>
                 <Text>{item.ultimaMensagem}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     }
 
     return (
